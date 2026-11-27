@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<!--
+  营销网址（Marketing URL）落地页。
+  部署前必做：全文件搜索替换下列占位符（文件头注释与正文各一处/多处在注释里标出）
+    {{主体名称}}      -> 开发者 / 公司主体名称（页脚版权）
+    {{联系邮箱}}      -> 可正常收信的邮箱
+    {{App Store链接}} -> App 上架后的 App Store 页面地址（有两个文件内引用）
+  替换后删除本注释块。
+  部署时把整个 web/ 目录（含 assets/ 子目录）一起上传到仓库根目录。
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>蛙蛙继续走：勇闯天涯 · 有些陪伴，不需要一直在线</title>
+<meta name="description" content="给蛙蛙起个名字，收几片青叶，目送它出门。一款不用登录、不用联网、没有广告和内购的治愈系放置游戏。">
+<style>
+  :root {
+    --bg: #F6F8F2;
+    --card: #FFFDF8;
+    --ink: #2F3B2C;
+    --muted: #66735E;
+    --green: #5C7A4A;
+    --green-dark: #405A35;
+    --green-soft: #E7EFDF;
+    --line: #DDE5D5;
+    --accent: #C08A45;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    font-size: 16px;
+    line-height: 1.85;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: var(--green); text-decoration: none; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 22px; }
+
+  /* 导航 */
+  nav { background: rgba(246,248,242,.94); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 10; }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 16px; }
+  .brand-mark {
+    width: 36px; height: 36px; border-radius: 11px; flex: none; background: var(--green-soft);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .navlinks { display: flex; gap: 24px; font-size: 14px; color: var(--muted); }
+  .navlinks a { color: var(--muted); }
+  .navlinks a:hover { color: var(--green); }
+
+  /* Hero */
+  .hero { padding: 74px 0 40px; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 46px; align-items: center; }
+  .eyebrow { color: var(--accent); font-size: 14px; letter-spacing: .08em; margin: 0 0 14px; }
+  h1 { font-size: 44px; line-height: 1.32; margin: 0 0 18px; font-weight: 700; letter-spacing: -.01em; }
+  h1 span { color: var(--green); }
+  .hero p.lede { font-size: 18px; color: var(--muted); margin: 0 0 28px; max-width: 30em; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 13px 26px; border-radius: 999px; font-weight: 700; font-size: 15px;
+    border: 1px solid transparent; transition: transform .15s ease, background .15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--green); color: #fff; }
+  .btn-primary:hover { background: var(--green-dark); }
+  .btn-ghost { background: transparent; color: var(--green); border-color: var(--line); }
+  .hero-art { border-radius: 22px; overflow: hidden; box-shadow: 0 18px 44px rgba(64,90,53,.13); }
+  .hero-art img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+
+  /* 通用区块 */
+  .section { padding: 54px 0; }
+  .section-alt { background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .section-head { text-align: center; max-width: 640px; margin: 0 auto 34px; }
+  .section-head h2 { font-size: 30px; margin: 0 0 10px; line-height: 1.35; }
+  .section-head p { color: var(--muted); margin: 0; }
+
+  /* 玩法亮点 */
+  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .feature {
+    background: var(--bg); border: 1px solid var(--line); border-radius: 16px; padding: 24px 22px;
+  }
+  .feature .ico {
+    width: 40px; height: 40px; border-radius: 12px; background: var(--green-soft);
+    display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+  }
+  .feature h3 { font-size: 17px; margin: 0 0 6px; }
+  .feature p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.75; }
+
+  /* 画廊 */
+  .gallery { display: grid; grid-template-columns: 1.6fr 1fr; gap: 18px; }
+  .shot { border-radius: 18px; overflow: hidden; border: 1px solid var(--line); background: var(--card); }
+  .shot img { width: 100%; }
+  .shot .cap { padding: 14px 18px; font-size: 14px; color: var(--muted); }
+  .shot-stack { display: grid; gap: 18px; }
+
+  /* 安心承诺 */
+  .promise {
+    background: var(--green-soft); border-radius: 20px; padding: 36px 38px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center;
+  }
+  .promise h2 { font-size: 27px; margin: 0 0 12px; }
+  .promise p { margin: 0 0 12px; }
+  .promise ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+  .promise li { padding-left: 26px; position: relative; }
+  .promise li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+
+  /* 结尾 CTA */
+  .cta { text-align: center; padding: 66px 0 56px; }
+  .cta h2 { font-size: 30px; margin: 0 0 12px; }
+  .cta p { color: var(--muted); margin: 0 0 26px; }
+  .cta .note { font-size: 13px; margin-top: 16px; }
+
+  footer { border-top: 1px solid var(--line); padding: 26px 0 40px; font-size: 13px; color: var(--muted); }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; align-items: center; }
+  footer a { margin-left: 18px; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 860px) {
+    h1 { font-size: 34px; }
+    .hero-grid, .gallery, .promise { grid-template-columns: 1fr; }
+    .features { grid-template-columns: 1fr 1fr; }
+    .navlinks { display: none; }
+  }
+  @media (max-width: 520px) {
+    .wrap { padding: 0 16px; }
+    .hero { padding-top: 46px; }
+    h1 { font-size: 29px; }
+    .features { grid-template-columns: 1fr; }
+    .promise { padding: 26px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 18c7-1 12-6 13-13-7 1-12 6-13 13Z" fill="#88A86E"/><path d="M5 18c3-4 6-6 11-9" stroke="#5C7A4A" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </span>
+      蛙蛙继续走
+    </span>
+    <span class="navlinks">
+      <a href="#features">玩法</a>
+      <a href="#gallery">画面</a>
+      <a href="#promise">安心</a>
+      <a href="#download">下载</a>
+    </span>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">一款可以慢慢玩的放置游戏</p>
+      <h1>有些陪伴，<br><span>不需要一直在线。</span></h1>
+      <p class="lede">给蛙蛙起个名字，收几片青叶，装进行囊，目送它出门。它会在路上寄回明信片，带回远方的小特产；你什么都不做，它也会按时回家。</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="{{App Store链接}}">前往 App Store</a>
+        <a class="btn btn-ghost" href="#features">看看怎么玩</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <img src="assets/frog.jpg" alt="戴着黄围巾、背着小包的青蛙站在石桥上" width="760" height="760">
+    </div>
+  </div>
+</header>
+
+<section class="section section-alt" id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>想玩就玩，想歇就歇</h2>
+      <p>没有倒计时，没有失败惩罚，也没有必须完成的任务。</p>
+    </div>
+    <div class="features">
+      <div class="feature">
+        <div class="ico" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="#5C7A4A" stroke-width="1.6"/><path d="M12 7v5l3.5 2" stroke="#5C7A4A" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <h3>它会自己回家</h3>
+        <p>首次出门约 3 分钟，之后随行囊里的食物，从 20 分钟到 8 小时不等。不用守着，也不用担心错过什么。</p>
+      </div>
+      <div class="feature">
+        <div class="ico" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="12" r="5.5" stroke="#5C7A4A" stroke-width="1.6"/><circle cx="15" cy="12" r="5.5" stroke="#5C7A4A" stroke-width="1.6"/></svg>
+        </div>
+        <h3>一段可选的路上小憩</h3>
+        <p>30 个手工解环关卡，1–3 分钟一段路。想搭把手就理清一段绕在一起的路线；不玩也不影响它回家、寄明信片或带回礼物。</p>
+      </div>
+      <div class="feature">
+        <div class="ico" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="6" width="16" height="13" rx="2" stroke="#5C7A4A" stroke-width="1.6"/><path d="M4 10h16M9 6V4h6v2" stroke="#5C7A4A" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <h3>慢慢收集一个世界</h3>
+        <p>3 个旅行地区、18 张明信片、9 种地方特产。3 位动物朋友会来家里做客，招待特产、添置家具，让小屋一点点变暖。</p>
+      </div>
+      <div class="feature">
+        <div class="ico" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 14v-3a8 8 0 0 1 16 0v3" stroke="#5C7A4A" stroke-width="1.6" stroke-linecap="round"/><rect x="2" y="13" width="4" height="6" rx="1.5" stroke="#5C7A4A" stroke-width="1.6"/><rect x="18" y="13" width="4" height="6" rx="1.5" stroke="#5C7A4A" stroke-width="1.6"/></svg>
+        </div>
+        <h3>听得见的地方</h3>
+        <p>庭院的溪水、夜晚的虫鸣、旧城的雨声，配三首场景小曲。音效与音乐可以分别调音量，也能一键关掉。</p>
+      </div>
+      <div class="feature">
+        <div class="ico" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6l7-3Z" stroke="#5C7A4A" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>只在你自己的手机里</h3>
+        <p>不用登录，不用联网，没有广告，也没有内购。名字、青叶、明信片和家具都只存在你的设备上。存档可以导出和导入，回忆由你自己保存。</p>
+      </div>
+      <div class="feature">
+        <div class="ico" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="#5C7A4A" stroke-width="1.6"/><path d="M8.5 12h7M12 8.5v7" stroke="#5C7A4A" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <h3>每个人都能玩</h3>
+        <p>解环除了颜色还有线型和符号区分，支持 VoiceOver 读出环的状态。一处庭院、一间小屋、一个行囊，一屏切换。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="gallery">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>路上寄回的风景</h2>
+      <p>水彩画的庭院、石桥与远方，按你自己的节奏收进画集。</p>
+    </div>
+    <div class="gallery">
+      <div class="shot">
+        <img src="assets/hero.jpg" alt="傍晚亮着灯的庭院小屋，石板路通向邮筒" width="1280" height="720" loading="lazy">
+        <div class="cap">庭院 · 小屋 · 等待的时刻</div>
+      </div>
+      <div class="shot-stack">
+        <div class="shot">
+          <img src="assets/postcard.jpg" alt="青蛙坐在石桥上，桥下水中有倒影" width="1280" height="720" loading="lazy">
+          <div class="cap">旅途中寄回的明信片</div>
+        </div>
+        <div class="shot">
+          <img src="assets/frog.jpg" alt="戴黄围巾的青蛙特写" width="760" height="760" loading="lazy">
+          <div class="cap">给它起个名字吧</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="promise" id="promise">
+      <div>
+        <h2>安心的地方</h2>
+        <p>我们希望你把它放下很久再打开，回来时一切还在——而且没有任何东西在后台等着你。</p>
+        <p class="note">这不是任何游戏的官方续作，也不承接任何旧账号数据。它只是想让「等一只蛙回家」这件事，还能继续。</p>
+      </div>
+      <ul>
+        <li>不用注册或登录</li>
+        <li>完全离线可用，飞行模式也能玩</li>
+        <li>没有广告、没有内购、没有统计 SDK</li>
+        <li>存档只存本地，可导出导入</li>
+        <li>画集里的明信片可保存为图片</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="download">
+  <div class="wrap">
+    <h2>想玩就玩，想歇就歇。</h2>
+    <p>蛙蛙会等你，也会自己回来。</p>
+    <a class="btn btn-primary" href="{{App Store链接}}">前往 App Store 下载</a>
+    <p class="note">需要 iOS 13.0 或更高版本，支持 iPhone 与 iPad。</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 {{主体名称}}</span>
+    <span>
+      <a href="privacy.html">隐私政策</a>
+      <a href="support.html">支持与帮助</a>
+      <a href="mailto:{{联系邮箱}}">联系我们</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
